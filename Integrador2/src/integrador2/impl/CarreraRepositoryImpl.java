@@ -1,5 +1,6 @@
 package integrador2.impl;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import javax.persistence.EntityManagerFactory;
 import org.apache.commons.csv.CSVRecord;
 
 import integrador2.dto.CarreraDTO;
+import integrador2.dto.ReporteDTO;
 import integrador2.entidades.Carrera;
 import integrador2.repository.CarreraRepository;
 
@@ -18,6 +20,29 @@ public class CarreraRepositoryImpl implements CarreraRepository{
 	
 	public CarreraRepositoryImpl(EntityManagerFactory emf) {
 		this.emf = emf;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ReporteDTO> obtenerReporte() {
+		List<Object[]> lista;
+		
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		
+		String sql = "SELECT c.nombre, ec.fecha_inscripcion, COUNT(ec.fecha_inscripcion) as cant_inscriptos, COUNT(ec.fecha_graduacion) as graduados "
+		+ "FROM carrera c JOIN estudiantecarrera ec ON (c.id = ec.fk_carrera) "
+		+ "GROUP BY c.nombre, ec.fecha_inscripcion, ec.fecha_graduacion "
+		+ "HAVING ec.fecha_graduacion != 0 "
+		+ "ORDER BY ec.fecha_inscripcion ASC";
+		
+		lista = em.createNativeQuery(sql).getResultList();
+		
+		em.getTransaction().commit();
+		em.close();
+		
+		List<ReporteDTO> reporte = lista.stream().map(o -> new ReporteDTO((String)o[0], (BigInteger)o[1], (BigInteger)o[2], (BigInteger)o[3])).toList();
+		return reporte;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -32,9 +57,9 @@ public class CarreraRepositoryImpl implements CarreraRepository{
 		lista = em.createQuery("SELECT c "
 				+ "FROM Carrera c "
 				+ "JOIN c.estudiantes e "
-				+ "WHERE c.id = e.carrera.id "
-				+ "GROUP BY c "
-				+ "ORDER BY COUNT(c) DESC").getResultList();
+				+ "ON (c.id = e.carrera.id) "
+				+ "GROUP BY c.id "
+				+ "ORDER BY count(*) DESC").getResultList();
 		
 		em.getTransaction().commit();
 		em.close();

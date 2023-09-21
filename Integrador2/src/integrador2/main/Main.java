@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 import integrador2.csv.CSVReader;
 import integrador2.dto.CarreraDTO;
 import integrador2.dto.EstudianteDTO;
+import integrador2.dto.ReporteDTO;
 import integrador2.entidades.Carrera;
 import integrador2.entidades.Estudiante;
 import integrador2.entidades.EstudianteCarrera;
@@ -37,8 +38,9 @@ public class Main {
 		
 		//csv.insertar("resources/estudianteCarrera.csv", estudianteCarreraRepo);
 		
-		List<EstudianteDTO> lista = estudianteRepo.obtenerEstudiantePorGenero("Male");
-		lista.forEach(p -> System.out.println(p));
+		List<ReporteDTO> lista = carreraRepo.obtenerReporte();
+		
+		lista.forEach(r -> System.out.println(r));
 	}
 
 }
