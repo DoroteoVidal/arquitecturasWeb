@@ -30,10 +30,9 @@ public class CarreraRepositoryImpl implements CarreraRepository{
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		
-		String sql = "SELECT c.nombre, ec.fecha_inscripcion, COUNT(ec.fecha_inscripcion) as cant_inscriptos, COUNT(ec.fecha_graduacion) as graduados "
+		String sql = "SELECT c.nombre, ec.fecha_inscripcion, COUNT(ec.fecha_inscripcion) as cant_inscriptos, COUNT(CASE WHEN ec.fecha_graduacion != 0 THEN 1 END ) as graduados "
 		+ "FROM carrera c JOIN estudiantecarrera ec ON (c.id = ec.fk_carrera) "
-		+ "GROUP BY c.nombre, ec.fecha_inscripcion, ec.fecha_graduacion "
-		+ "HAVING ec.fecha_graduacion != 0 "
+		+ "GROUP BY c.nombre, ec.fecha_inscripcion "
 		+ "ORDER BY ec.fecha_inscripcion ASC";
 		
 		lista = em.createNativeQuery(sql).getResultList();
