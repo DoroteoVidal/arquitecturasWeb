@@ -1,7 +1,6 @@
 package integrador2.impl;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -30,45 +29,39 @@ public class CarreraRepositoryImpl implements CarreraRepository{
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		
-		String sql = "SELECT c.nombre, ec.fecha_inscripcion, COUNT(ec.fecha_inscripcion) as cant_inscriptos, COUNT(CASE WHEN ec.fecha_graduacion != 0 THEN 1 END ) as graduados "
-		+ "FROM carrera c JOIN estudiantecarrera ec ON (c.id = ec.fk_carrera) "
-		+ "GROUP BY c.nombre, ec.fecha_inscripcion "
-		+ "ORDER BY ec.fecha_inscripcion ASC";
-		
-		lista = em.createNativeQuery(sql).getResultList();
+		lista = em.createNativeQuery("SELECT c.nombre, ec.fecha_inscripcion, "
+			+ "COUNT(ec.fecha_inscripcion) as cant_inscriptos, "
+			+ "COUNT(CASE WHEN ec.fecha_graduacion != 0 THEN 1 END ) as graduados "
+			+ "FROM carrera c JOIN estudiantecarrera ec ON (c.id = ec.fk_carrera) "
+			+ "GROUP BY c.nombre, ec.fecha_inscripcion "
+			+ "ORDER BY c.nombre ASC").getResultList();
 		
 		em.getTransaction().commit();
 		em.close();
 		
-		List<ReporteDTO> reporte = lista.stream().map(o -> new ReporteDTO((String)o[0], (BigInteger)o[1], (BigInteger)o[2], (BigInteger)o[3])).toList();
+		List<ReporteDTO> reporte = lista.stream().map(o -> 
+		new ReporteDTO((String)o[0], (BigInteger)o[1], (BigInteger)o[2], (BigInteger)o[3])).toList();
 		return reporte;
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<CarreraDTO> obtenerCarrerasConEstudiantesInscriptos() {
-		List<Carrera> lista = new ArrayList<>();
-		List<CarreraDTO> listaDto = new ArrayList<>();
-		
+		List<Object[]> lista;
+
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		
-		lista = em.createQuery("SELECT c "
-				+ "FROM Carrera c "
-				+ "JOIN c.estudiantes e "
-				+ "ON (c.id = e.carrera.id) "
-				+ "GROUP BY c.id "
-				+ "ORDER BY count(*) DESC").getResultList();
+
+		lista = em.createNativeQuery("SELECT c.nombre, count(*) as cant_inscriptos "
+			+ "FROM carrera c "
+			+ "JOIN estudiantecarrera ec ON (c.id = ec.fk_carrera) "
+			+ "GROUP BY c.nombre "
+			+ "ORDER BY count(*) DESC").getResultList();
 		
 		em.getTransaction().commit();
 		em.close();
 		
-		if(lista.size() > 0) {
-			for(Carrera c : lista) {
-				CarreraDTO dto = new CarreraDTO(c.getId(), c.getNombre(), c.getDuracion());
-				listaDto.add(dto);
-			}
-		}
+		List<CarreraDTO> listaDto = lista.stream().map(c -> new CarreraDTO((String)c[0], (BigInteger)c[1])).toList();
 		
 		return listaDto;
 	}

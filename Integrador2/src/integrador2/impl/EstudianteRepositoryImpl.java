@@ -33,9 +33,9 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 		em.getTransaction().begin();
 		
 		lista = em.createQuery("SELECT e FROM Estudiante e "
-		+ "JOIN e.carreras ec ON (e.id = ec.estudiante.id) "
-		+ "WHERE ec.carrera.id = :id_carrera "
-		+ "AND e.ciudadResidencia = :ciudad")
+			+ "JOIN e.carreras ec ON (e.id = ec.estudiante.id) "
+			+ "WHERE ec.carrera.id = :id_carrera "
+			+ "AND e.ciudadResidencia = :ciudad")
 		.setParameter("id_carrera", c.getId())
 		.setParameter("ciudad", ciudad).getResultList();
 		

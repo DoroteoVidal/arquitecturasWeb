@@ -1,34 +1,30 @@
 package integrador2.dto;
 
+import java.math.BigInteger;
+
 public class CarreraDTO {
-	private Long id;
 	private String nombre;
-	private int duracion;
+	private BigInteger cantidad;
 	
 	public CarreraDTO() {}
 	
-	public CarreraDTO(Long id, String nombre, int duracion) {
+	public CarreraDTO(String nombre, BigInteger cantidad) {
 		super();
-		this.id = id;
 		this.nombre = nombre;
-		this.duracion = duracion;
-	}
-
-	public Long getId() {
-		return id;
+		this.cantidad = cantidad;
 	}
 
 	public String getNombre() {
 		return nombre;
 	}
 	
-	public int getDuracion() {
-		return duracion;
+	public BigInteger getCantidad() {
+		return cantidad;
 	}
 
 	@Override
 	public String toString() {
-		return "CarreraDTO [id=" + id + ", nombre=" + nombre + ", duracion=" + duracion + "]";
+		return "CarreraDTO [nombre=" + nombre + ", cantidad=" + cantidad + "]";
 	}
 	
 }
