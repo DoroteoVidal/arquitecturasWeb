@@ -1,6 +1,5 @@
 package integrador2.repository;
 
-import java.util.Comparator;
 import java.util.List;
 
 import integrador2.dto.EstudianteDTO;
@@ -11,7 +10,7 @@ public interface EstudianteRepository extends Repository<Estudiante> {
 	
 	public List<EstudianteDTO> obtenerEstudiantesDeCarreraPorCiudad(Carrera c, String ciudad);
 	
-	public List<EstudianteDTO> obtenerEstudiantesPorCriterio(Comparator<EstudianteDTO> orden);
+	public List<EstudianteDTO> obtenerEstudiantesPorCriterio(String orden);
 	
 	public List<EstudianteDTO> obtenerEstudiantePorGenero(String genero);
 	

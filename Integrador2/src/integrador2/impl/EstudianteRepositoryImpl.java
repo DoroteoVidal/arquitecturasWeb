@@ -1,8 +1,6 @@
 package integrador2.impl;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -23,7 +21,6 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 		this.emf = emf;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<EstudianteDTO> obtenerEstudiantesDeCarreraPorCiudad(Carrera c, String ciudad) {
 		List<Estudiante> lista = new ArrayList<>();
@@ -35,7 +32,7 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 		lista = em.createQuery("SELECT e FROM Estudiante e "
 			+ "JOIN e.carreras ec ON (e.id = ec.estudiante.id) "
 			+ "WHERE ec.carrera.id = :id_carrera "
-			+ "AND e.ciudadResidencia = :ciudad")
+			+ "AND e.ciudadResidencia = :ciudad", Estudiante.class)
 		.setParameter("id_carrera", c.getId())
 		.setParameter("ciudad", ciudad).getResultList();
 		
@@ -53,7 +50,6 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 		return listaDto;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<EstudianteDTO> obtenerEstudiantePorGenero(String genero) {
 		List<Estudiante> lista = new ArrayList<>();
@@ -62,7 +58,7 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		
-		lista = em.createQuery("SELECT e FROM Estudiante e WHERE e.genero = :genero")
+		lista = em.createQuery("SELECT e FROM Estudiante e WHERE e.genero = :genero", Estudiante.class)
 		.setParameter("genero", genero)
 		.getResultList();
 		
@@ -80,16 +76,16 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 		return listaDto;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<EstudianteDTO> obtenerEstudiantesPorCriterio(Comparator<EstudianteDTO> orden) {
+	public List<EstudianteDTO> obtenerEstudiantesPorCriterio(String orden) {
 		List<Estudiante> lista = new ArrayList<>();
 		List<EstudianteDTO> listaDto = new ArrayList<>();
 		
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		
-		lista = em.createQuery("SELECT e FROM Estudiante e").getResultList();
+		lista = em.createQuery("SELECT e FROM Estudiante e ORDER BY " + orden, Estudiante.class)
+		.getResultList();
 		
 		em.getTransaction().commit();
 		em.close();
@@ -101,7 +97,6 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 				listaDto.add(dto);
 			}
 		}
-		Collections.sort(listaDto, orden);
 		return listaDto;
 	}
 

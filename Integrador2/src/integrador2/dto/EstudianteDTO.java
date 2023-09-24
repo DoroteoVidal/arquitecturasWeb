@@ -1,6 +1,6 @@
 package integrador2.dto;
 
-public class EstudianteDTO implements Comparable<EstudianteDTO>{
+public class EstudianteDTO {
 	private Long dni;
 	private String nombre;
 	private String apellido;
@@ -56,11 +56,6 @@ public class EstudianteDTO implements Comparable<EstudianteDTO>{
 		return "EstudianteDTO [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad
 				+ ", genero=" + genero + ", ciudadResidencia=" + ciudadResidencia + ", numLibretaUni=" + numLibretaUni
 				+ "]";
-	}
-
-	@Override
-	public int compareTo(EstudianteDTO otro) {
-		return this.getNombre().compareTo(otro.nombre);
 	}
 
 }
