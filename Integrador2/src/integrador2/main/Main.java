@@ -32,57 +32,57 @@ public class Main {
 		CSVReader csv = CSVReader.getInstance();
 		
 		
-		//csv.insertar("resources/estudiantes.csv", estudianteRepo);
+		csv.insertar("resources/estudiantes.csv", estudianteRepo);
 		
-		//csv.insertar("resources/carreras.csv", carreraRepo);
+		csv.insertar("resources/carreras.csv", carreraRepo);
 		
-		//csv.insertar("resources/estudianteCarrera.csv", estudianteCarreraRepo);
+		csv.insertar("resources/estudianteCarrera.csv", estudianteCarreraRepo);
 		
 		
 		//2) Implementar consultas para:
 		//a) dar de alta un estudiante
 		
-		//Estudiante e  = new Estudiante(44873623L, "Federico", "Ortega", 21, "Male", "Tandil", 1234354L);		
-		//estudianteRepo.crear(e);
+		Estudiante e  = new Estudiante(41254672L, "Arturo", "Vidal", 22, "Male", "Rauch", 1431503L);		
+		estudianteRepo.crear(e);
 		
 		//b) matricular un estudiante en una carrera
 		
-		//Carrera c = carreraRepo.obtenerPorId(1L);
+		Carrera c = carreraRepo.obtenerPorId(1L);
 		
-		//EstudianteCarrera ec = new EstudianteCarrera(e, c, 2021L, 0L, 1);
-		//estudianteCarreraRepo.crear(ec);
+		EstudianteCarrera ec = new EstudianteCarrera(e, c, 2020L, 2021L, 2);
+		estudianteCarreraRepo.crear(ec);
 		
 		//c) recuperar todos los estudiantes, y especificar algun criterio de ordenamiento simple.
 		//Se ordena por apellido
 		
-		//List<EstudianteDTO> estudiantes = estudianteRepo.obtenerEstudiantesPorCriterio();		
-		//estudiantes.forEach(est -> System.out.println(est));
+		List<EstudianteDTO> estudiantes = estudianteRepo.obtenerEstudiantesOrdenadosPorCriterio();		
+		estudiantes.forEach(est -> System.out.println(est));
 		
 		//d) recuperar un estudiante, en base a su numero de libreta universitaria.
 		
-		//System.out.println(estudianteRepo.obtenerEstudiantePorLibUni(1234354L));
+		System.out.println(estudianteRepo.obtenerEstudiantePorLibUni(1234354L));
 		
 		//e) recuperar todos los estudiantes, en base a su genero.
 		
-		//List<EstudianteDTO> estudiantes = estudianteRepo.obtenerEstudiantePorGenero("Female");
-		//estudiantes.forEach(est -> System.out.println(est));
+		List<EstudianteDTO> estudiantesGenero = estudianteRepo.obtenerEstudiantePorGenero("Female");
+		estudiantesGenero.forEach(est -> System.out.println(est));
 		
 		//f) recuperar las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos.
 		
-		//List<CarreraDTO> carreras = carreraRepo.obtenerCarrerasConEstudiantesInscriptos();	
-		//carreras.forEach(carrera -> System.out.println(carrera));
+		List<CarreraDTO> carreras = carreraRepo.obtenerCarrerasConEstudiantesInscriptos();	
+		carreras.forEach(carrera -> System.out.println(carrera));
 		
 		//g) recuperar los estudiantes de una determinada carrera, filtrado por ciudad de residencia.
 		
-		//List<EstudianteDTO> estudiantesCarre = estudianteRepo.obtenerEstudiantesDeCarreraPorCiudad(c, "Tandil");		
-		//estudiantesCarre.forEach(es -> System.out.println(es));
+		List<EstudianteDTO> estudiantesCarre = estudianteRepo.obtenerEstudiantesDeCarreraPorCiudad(c, "Tandil");		
+		estudiantesCarre.forEach(es -> System.out.println(es));
 		
 		//3) Generar un reporte de las carreras, que para cada carrera incluya información de los
 		//inscriptos y egresados por año. Se deben ordenar las carreras alfabeticamente, y presentar
 		//los años de manera cronologica.
 		
-		//List<ReporteDTO> reporte = carreraRepo.obtenerReporte();		
-		//reporte.forEach(re -> System.out.println(re));
+		List<ReporteDTO> reporte = carreraRepo.obtenerReporte();		
+		reporte.forEach(re -> System.out.println(re));
 	}
 
 }

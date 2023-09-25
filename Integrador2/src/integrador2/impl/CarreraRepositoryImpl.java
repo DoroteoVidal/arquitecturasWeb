@@ -1,5 +1,6 @@
 package integrador2.impl;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -28,17 +29,21 @@ public class CarreraRepositoryImpl implements CarreraRepository{
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		
-		lista = em.createQuery("SELECT c.nombre, ec.fechaInscripcion, COUNT(ec.fechaInscripcion), "
-				+ "COUNT(CASE WHEN ec.fechaGraduacion != 0 THEN 1 END) "
-				+ "FROM Carrera c JOIN c.estudiantes ec ON (c.id = ec.carrera.id) "
-				+ "GROUP BY c.nombre, ec.fechaInscripcion "
-				+ "ORDER BY c.nombre ASC").getResultList();
+		lista = em.createNativeQuery("SELECT nombre, fecha_inscripcion, COUNT(fecha_inscripcion) as inscriptos, 0 as graduados "
+				+ "FROM carrera c JOIN estudiantecarrera ec ON (c.id = ec.fk_carrera) "
+				+ "GROUP BY nombre, fecha_inscripcion "
+				+ "UNION "
+				+ "SELECT nombre, fecha_graduacion, 0 as inscriptos, COUNT(fecha_graduacion) as graduados "
+				+ "FROM carrera c JOIN estudiantecarrera ec ON (c.id = ec.fk_carrera) "
+				+ "GROUP BY nombre, fecha_graduacion "
+				+ "HAVING fecha_graduacion != 0 "
+				+ "ORDER BY nombre, fecha_inscripcion ASC").getResultList();
 		
 		em.getTransaction().commit();
 		em.close();
 		
 		List<ReporteDTO> reporte = lista.stream().map(o -> 
-		new ReporteDTO((String)o[0], (Long)o[1], (Long)o[2], (Long)o[3])).toList();
+		new ReporteDTO((String)o[0], (BigInteger)o[1], (BigInteger)o[2], (BigInteger)o[3])).toList();
 		return reporte;
 	}
 	
