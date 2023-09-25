@@ -77,14 +77,14 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 	}
 	
 	@Override
-	public List<EstudianteDTO> obtenerEstudiantesPorCriterio(String orden) {
+	public List<EstudianteDTO> obtenerEstudiantesOrdenadosPorCriterio() {
 		List<Estudiante> lista = new ArrayList<>();
 		List<EstudianteDTO> listaDto = new ArrayList<>();
 		
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		
-		lista = em.createQuery("SELECT e FROM Estudiante e ORDER BY " + orden, Estudiante.class)
+		lista = em.createQuery("SELECT e FROM Estudiante e ORDER BY e.apellido", Estudiante.class)
 		.getResultList();
 		
 		em.getTransaction().commit();

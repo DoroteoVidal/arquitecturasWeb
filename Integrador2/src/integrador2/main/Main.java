@@ -53,8 +53,9 @@ public class Main {
 		//estudianteCarreraRepo.crear(ec);
 		
 		//c) recuperar todos los estudiantes, y especificar algun criterio de ordenamiento simple.
+		//Se ordena por apellido
 		
-		//List<EstudianteDTO> estudiantes = estudianteRepo.obtenerEstudiantesPorCriterio("nombre");		
+		//List<EstudianteDTO> estudiantes = estudianteRepo.obtenerEstudiantesPorCriterio();		
 		//estudiantes.forEach(est -> System.out.println(est));
 		
 		//d) recuperar un estudiante, en base a su numero de libreta universitaria.
@@ -80,8 +81,8 @@ public class Main {
 		//inscriptos y egresados por año. Se deben ordenar las carreras alfabeticamente, y presentar
 		//los años de manera cronologica.
 		
-		List<ReporteDTO> reporte = carreraRepo.obtenerReporte();		
-		reporte.forEach(re -> System.out.println(re));
+		//List<ReporteDTO> reporte = carreraRepo.obtenerReporte();		
+		//reporte.forEach(re -> System.out.println(re));
 	}
 
 }

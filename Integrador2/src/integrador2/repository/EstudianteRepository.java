@@ -10,7 +10,7 @@ public interface EstudianteRepository extends Repository<Estudiante> {
 	
 	public List<EstudianteDTO> obtenerEstudiantesDeCarreraPorCiudad(Carrera c, String ciudad);
 	
-	public List<EstudianteDTO> obtenerEstudiantesPorCriterio(String orden);
+	public List<EstudianteDTO> obtenerEstudiantesOrdenadosPorCriterio();
 	
 	public List<EstudianteDTO> obtenerEstudiantePorGenero(String genero);
 	
