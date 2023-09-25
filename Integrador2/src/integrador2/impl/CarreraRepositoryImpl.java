@@ -1,6 +1,5 @@
 package integrador2.impl;
 
-import java.math.BigInteger;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -29,18 +28,17 @@ public class CarreraRepositoryImpl implements CarreraRepository{
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		
-		lista = em.createNativeQuery("SELECT c.nombre, ec.fecha_inscripcion, "
-			+ "COUNT(ec.fecha_inscripcion) as cant_inscriptos, "
-			+ "COUNT(CASE WHEN ec.fecha_graduacion != 0 THEN 1 END ) as graduados "
-			+ "FROM carrera c JOIN estudiantecarrera ec ON (c.id = ec.fk_carrera) "
-			+ "GROUP BY c.nombre, ec.fecha_inscripcion "
-			+ "ORDER BY c.nombre ASC").getResultList();
+		lista = em.createQuery("SELECT c.nombre, ec.fechaInscripcion, COUNT(ec.fechaInscripcion), "
+				+ "COUNT(CASE WHEN ec.fechaGraduacion != 0 THEN 1 END) "
+				+ "FROM Carrera c JOIN c.estudiantes ec ON (c.id = ec.carrera.id) "
+				+ "GROUP BY c.nombre, ec.fechaInscripcion "
+				+ "ORDER BY c.nombre ASC").getResultList();
 		
 		em.getTransaction().commit();
 		em.close();
 		
 		List<ReporteDTO> reporte = lista.stream().map(o -> 
-		new ReporteDTO((String)o[0], (BigInteger)o[1], (BigInteger)o[2], (BigInteger)o[3])).toList();
+		new ReporteDTO((String)o[0], (Long)o[1], (Long)o[2], (Long)o[3])).toList();
 		return reporte;
 	}
 	
@@ -52,16 +50,16 @@ public class CarreraRepositoryImpl implements CarreraRepository{
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 
-		lista = em.createNativeQuery("SELECT c.nombre, count(*) as cant_inscriptos "
-			+ "FROM carrera c "
-			+ "JOIN estudiantecarrera ec ON (c.id = ec.fk_carrera) "
+		lista = em.createQuery("SELECT c.nombre, COUNT(ec.estudiante) "
+			+ "FROM Carrera c "
+			+ "JOIN c.estudiantes ec ON (c.id = ec.carrera.id) "
 			+ "GROUP BY c.nombre "
-			+ "ORDER BY count(*) DESC").getResultList();
+			+ "ORDER BY COUNT(ec.estudiante) ASC").getResultList();
 		
 		em.getTransaction().commit();
 		em.close();
 		
-		List<CarreraDTO> listaDto = lista.stream().map(c -> new CarreraDTO((String)c[0], (BigInteger)c[1])).toList();
+		List<CarreraDTO> listaDto = lista.stream().map(c -> new CarreraDTO((String)c[0], (Long)c[1])).toList();
 		
 		return listaDto;
 	}

@@ -1,16 +1,14 @@
 package integrador2.dto;
 
-import java.math.BigInteger;
-
 public class ReporteDTO {
 	private String carrera;
-	private BigInteger anio;
-	private BigInteger inscriptos;
-	private BigInteger graduados;
+	private Long anio;
+	private Long inscriptos;
+	private Long graduados;
 	
 	public ReporteDTO() {}
 
-	public ReporteDTO(String carrera, BigInteger anio, BigInteger inscriptos, BigInteger graduados) {
+	public ReporteDTO(String carrera, Long anio, Long inscriptos, Long graduados) {
 		super();
 		this.carrera = carrera;
 		this.anio = anio;
@@ -22,15 +20,15 @@ public class ReporteDTO {
 		return carrera;
 	}
 
-	public BigInteger getAnio() {
+	public Long getAnio() {
 		return anio;
 	}
 
-	public BigInteger getInscriptos() {
+	public Long getInscriptos() {
 		return inscriptos;
 	}
 
-	public BigInteger getGraduados() {
+	public Long getGraduados() {
 		return graduados;
 	}
 

@@ -1,14 +1,12 @@
 package integrador2.dto;
 
-import java.math.BigInteger;
-
 public class CarreraDTO {
 	private String nombre;
-	private BigInteger cantidad;
+	private Long cantidad;
 	
 	public CarreraDTO() {}
 	
-	public CarreraDTO(String nombre, BigInteger cantidad) {
+	public CarreraDTO(String nombre, Long cantidad) {
 		super();
 		this.nombre = nombre;
 		this.cantidad = cantidad;
@@ -18,7 +16,7 @@ public class CarreraDTO {
 		return nombre;
 	}
 	
-	public BigInteger getCantidad() {
+	public Long getCantidad() {
 		return cantidad;
 	}
 

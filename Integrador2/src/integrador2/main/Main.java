@@ -42,53 +42,46 @@ public class Main {
 		//2) Implementar consultas para:
 		//a) dar de alta un estudiante
 		
-		//Estudiante e  = new Estudiante(40387612L, "Damian", "Silveros", 25, "Male", "Tandil", 2873612L);
-		
+		//Estudiante e  = new Estudiante(44873623L, "Federico", "Ortega", 21, "Male", "Tandil", 1234354L);		
 		//estudianteRepo.crear(e);
 		
 		//b) matricular un estudiante en una carrera
 		
 		//Carrera c = carreraRepo.obtenerPorId(1L);
 		
-		//EstudianteCarrera ec = new EstudianteCarrera(e, c, 2023L, 0L, 1);
-		
+		//EstudianteCarrera ec = new EstudianteCarrera(e, c, 2021L, 0L, 1);
 		//estudianteCarreraRepo.crear(ec);
 		
 		//c) recuperar todos los estudiantes, y especificar algun criterio de ordenamiento simple.
 		
-		List<EstudianteDTO> estudiantes = estudianteRepo.obtenerEstudiantesPorCriterio("nombre");
-		
-		estudiantes.forEach(est -> System.out.println(est));
+		//List<EstudianteDTO> estudiantes = estudianteRepo.obtenerEstudiantesPorCriterio("nombre");		
+		//estudiantes.forEach(est -> System.out.println(est));
 		
 		//d) recuperar un estudiante, en base a su numero de libreta universitaria.
 		
-		//System.out.println(estudianteRepo.obtenerEstudiantePorLibUni(2873612L));
+		//System.out.println(estudianteRepo.obtenerEstudiantePorLibUni(1234354L));
 		
 		//e) recuperar todos los estudiantes, en base a su genero.
 		
 		//List<EstudianteDTO> estudiantes = estudianteRepo.obtenerEstudiantePorGenero("Female");
-		
 		//estudiantes.forEach(est -> System.out.println(est));
 		
 		//f) recuperar las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos.
 		
-		//List<CarreraDTO> carreras = carreraRepo.obtenerCarrerasConEstudiantesInscriptos();
-		
+		//List<CarreraDTO> carreras = carreraRepo.obtenerCarrerasConEstudiantesInscriptos();	
 		//carreras.forEach(carrera -> System.out.println(carrera));
 		
 		//g) recuperar los estudiantes de una determinada carrera, filtrado por ciudad de residencia.
 		
-		//List<EstudianteDTO> estudiantesCarre = estudianteRepo.obtenerEstudiantesDeCarreraPorCiudad(c, "Tandil");
-		
+		//List<EstudianteDTO> estudiantesCarre = estudianteRepo.obtenerEstudiantesDeCarreraPorCiudad(c, "Tandil");		
 		//estudiantesCarre.forEach(es -> System.out.println(es));
 		
 		//3) Generar un reporte de las carreras, que para cada carrera incluya información de los
 		//inscriptos y egresados por año. Se deben ordenar las carreras alfabeticamente, y presentar
 		//los años de manera cronologica.
 		
-		//List<ReporteDTO> reporte = carreraRepo.obtenerReporte();
-		
-		//reporte.forEach(re -> System.out.println(re));
+		List<ReporteDTO> reporte = carreraRepo.obtenerReporte();		
+		reporte.forEach(re -> System.out.println(re));
 	}
 
 }
