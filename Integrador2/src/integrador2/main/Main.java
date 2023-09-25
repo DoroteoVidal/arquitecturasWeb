@@ -42,7 +42,7 @@ public class Main {
 		//2) Implementar consultas para:
 		//a) dar de alta un estudiante
 		
-		Estudiante e  = new Estudiante(41254672L, "Arturo", "Vidal", 22, "Male", "Rauch", 1431503L);		
+		Estudiante e  = new Estudiante(41402834L, "Javier", "Fernandez", 24, "Male", "Tandil", 3398172L);		
 		estudianteRepo.crear(e);
 		
 		//b) matricular un estudiante en una carrera
@@ -60,7 +60,7 @@ public class Main {
 		
 		//d) recuperar un estudiante, en base a su numero de libreta universitaria.
 		
-		System.out.println(estudianteRepo.obtenerEstudiantePorLibUni(1234354L));
+		System.out.println(estudianteRepo.obtenerEstudiantePorLibUni(3398172L));
 		
 		//e) recuperar todos los estudiantes, en base a su genero.
 		
