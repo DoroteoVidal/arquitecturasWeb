@@ -26,7 +26,7 @@ public class Carrera {
 	private int duracion;
 	
 	@OneToMany(mappedBy = "carrera", fetch = FetchType.LAZY)
-	private List<EstudianteCarrera> estudiantes;
+	private List<Inscripcion> estudiantes;
 
 	public Carrera() {}
 
@@ -61,11 +61,11 @@ public class Carrera {
 		this.duracion = duracion;
 	}
 
-	public List<EstudianteCarrera> getEstudiantes() {
+	public List<Inscripcion> getEstudiantes() {
 		return estudiantes;
 	}
 
-	public void setEstudiantes(List<EstudianteCarrera> estudiantes) {
+	public void setEstudiantes(List<Inscripcion> estudiantes) {
 		this.estudiantes = estudiantes;
 	}
 

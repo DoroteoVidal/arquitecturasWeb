@@ -10,7 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class EstudianteCarrera {
+public class Inscripcion {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,9 +33,9 @@ public class EstudianteCarrera {
 	@Column
 	private int antiguedad;
 	
-	public EstudianteCarrera() {}
+	public Inscripcion() {}
 
-	public EstudianteCarrera(Estudiante estudiante, Carrera carrera, Long fechaInscripcion, Long fechaGraduacion, int antiguedad) {
+	public Inscripcion(Estudiante estudiante, Carrera carrera, Long fechaInscripcion, Long fechaGraduacion, int antiguedad) {
 		super();
 		this.estudiante = estudiante;
 		this.carrera = carrera;
