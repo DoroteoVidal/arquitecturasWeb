@@ -17,7 +17,7 @@ public class EstudianteService {
 	
 	@Autowired
 	private EstudianteRepository estudianteRepository;
-	/*
+	
 	@Transactional
     public List<Estudiante> findAll() throws Exception {
         return estudianteRepository.findAll();
@@ -32,7 +32,7 @@ public class EstudianteService {
             throw new Exception(e.getMessage());
         }
     }
-	*/
+	
 	@Transactional
     public Estudiante save(Estudiante entity) throws Exception {
 		try{
@@ -57,8 +57,8 @@ public class EstudianteService {
 	@Transactional
 	public EstudianteDTO obtenerEstudiantePorLibUni(Long lu) throws Exception {
 		try {
-			Optional<EstudianteDTO> estudiante = estudianteRepository.obtenerEstudiantePorLibUni(lu);
-            return estudiante.get();
+			Estudiante e = estudianteRepository.obtenerEstudiantePorLibUni(lu);
+            return new EstudianteDTO(e.getDni(), e.getNombre(), e.getApellido(),e.getEdad(), e.getGenero(), e.getCiudadResidencia(), e.getNumLibretaUni());
 		}catch (Exception e){
             throw new Exception(e.getMessage());
         }
