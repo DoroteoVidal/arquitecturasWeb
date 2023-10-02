@@ -2,11 +2,11 @@ package integrador3.dto;
 
 public class CarreraDTO {
 	private String nombre;
-	private int cantidad;
+	private Long cantidad;
 	
 	public CarreraDTO() {}
 
-	public CarreraDTO(String nombre, int cantidad) {
+	public CarreraDTO(String nombre, Long cantidad) {
 		super();
 		this.nombre = nombre;
 		this.cantidad = cantidad;
@@ -16,7 +16,7 @@ public class CarreraDTO {
 		return nombre;
 	}
 
-	public int getCantidad() {
+	public Long getCantidad() {
 		return cantidad;
 	}
 

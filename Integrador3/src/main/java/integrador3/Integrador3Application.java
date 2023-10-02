@@ -10,16 +10,16 @@ import jakarta.annotation.PostConstruct;
 @SpringBootApplication
 public class Integrador3Application {
 	
-//	@Autowired
-//	private DataUpload dataUpload;
+	@Autowired
+	private DataUpload dataUpload;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Integrador3Application.class, args);
 	}
 	
-//	@PostConstruct
-//	public void init() {
-//		dataUpload.upload();
-//	}
+	@PostConstruct
+	public void init() {
+		dataUpload.upload();
+	}
 
 }
