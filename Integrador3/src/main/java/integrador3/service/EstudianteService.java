@@ -43,8 +43,8 @@ public class EstudianteService {
     }
 	
 	@Transactional
-    public List<EstudianteDTO> findAllBySurname(String surname) throws Exception { 
-		var result = estudianteRepository.findAllBySurname(surname);
+    public List<EstudianteDTO> obtenerEstudiantesOrdenadosPorApellido() throws Exception { 
+		var result = estudianteRepository.obtenerEstudiantesOrdenadosPorApellido();
     	try{
             return result.stream().map(p -> new EstudianteDTO(p.getDni(), p.getNombre(), 
             p.getApellido(), p.getEdad(), p.getGenero(), p.getCiudadResidencia(), p.getNumLibretaUni()))
@@ -55,9 +55,9 @@ public class EstudianteService {
     }
 	
 	@Transactional
-	public EstudianteDTO findByNumLibreta(Long lu) throws Exception {
+	public EstudianteDTO obtenerEstudiantePorLibUni(Long lu) throws Exception {
 		try {
-			Optional<EstudianteDTO> estudiante = estudianteRepository.findByNumLibreta(lu);
+			Optional<EstudianteDTO> estudiante = estudianteRepository.obtenerEstudiantePorLibUni(lu);
             return estudiante.get();
 		}catch (Exception e){
             throw new Exception(e.getMessage());
@@ -65,8 +65,8 @@ public class EstudianteService {
 	}
 	
 	@Transactional
-    public List<EstudianteDTO> findAllByGenero(String genero) throws Exception { 
-		var result = estudianteRepository.findAllByGenero(genero);
+    public List<EstudianteDTO> obtenerEstudiantePorGenero(String genero) throws Exception { 
+		var result = estudianteRepository.obtenerEstudiantePorGenero(genero);
     	try{
             return result.stream().map(p -> new EstudianteDTO(p.getDni(), p.getNombre(), 
             p.getApellido(), p.getEdad(), p.getGenero(), p.getCiudadResidencia(), p.getNumLibretaUni()))
@@ -75,4 +75,16 @@ public class EstudianteService {
             throw new Exception(e.getMessage());
         }
     }
+	
+	@Transactional
+	public List<EstudianteDTO> obtenerEstudiantesDeCarreraPorCiudad(Long idCarrera, String ciudad) throws Exception {
+		var result = estudianteRepository.obtenerEstudiantesDeCarreraPorCiudad(idCarrera, ciudad);
+    	try{
+            return result.stream().map(p -> new EstudianteDTO(p.getDni(), p.getNombre(), 
+            p.getApellido(), p.getEdad(), p.getGenero(), p.getCiudadResidencia(), p.getNumLibretaUni()))
+            .collect(Collectors.toList());
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+	}
 }
