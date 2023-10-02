@@ -1,5 +1,9 @@
 package integrador3.repository;
 
-public interface InscripcionRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import integrador3.model.Inscripcion;
+
+public interface InscripcionRepository extends JpaRepository<Inscripcion, Long> {
 
 }
