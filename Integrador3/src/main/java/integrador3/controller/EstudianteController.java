@@ -5,8 +5,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import integrador3.model.Estudiante;
 
 import integrador3.service.EstudianteService;
 
@@ -16,6 +20,15 @@ public class EstudianteController {
 	
 	@Autowired
 	private EstudianteService estudianteService;
+	
+	@PostMapping("")
+    public ResponseEntity<?> save(@RequestBody Estudiante estudiante) {
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(estudianteService.save(estudiante));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. No se pudo ingresar, revise los campos e intente nuevamente.\"}");
+        }
+    }
 	
 	@GetMapping("/ordenadosPorApellido")
 	public ResponseEntity<?> obtenerEstudiantesOrdenadosPorApellido() {
@@ -27,12 +40,30 @@ public class EstudianteController {
 	}
 	
 	@GetMapping("/porLibretaUni/{libreta}")
-	public ResponseEntity<?> obtenerEstudiantePorLibUni(@PathVariable Long libreta) {
+	public ResponseEntity<?> obtenerEstudiantePorNroLibreta(@PathVariable Long libreta) {
 		try{
-            return ResponseEntity.status(HttpStatus.OK).body(estudianteService.obtenerEstudiantePorLibUni(libreta));
+            return ResponseEntity.status(HttpStatus.OK).body(estudianteService.obtenerEstudiantePorNroLibreta(libreta));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
         }
 	}
+	
+	@GetMapping("/porGenero/{genero}")
+	public ResponseEntity<?> obtenerEstudiantePorGenero(@PathVariable String genero) {
+		try{
+			return ResponseEntity.status(HttpStatus.OK).body(estudianteService.obtenerEstudiantePorGenero(genero));
+		}catch (Exception e){
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+		}
+	}
 
+	@GetMapping("/porCarreraYCiudad/{idCarrera}/{ciudad}")
+	public ResponseEntity<?> obtenerEstudiantesDeCarreraPorCiudad(@PathVariable Long idCarrera, @PathVariable String ciudad) {
+		try{
+			return ResponseEntity.status(HttpStatus.OK).body(estudianteService.obtenerEstudiantesDeCarreraPorCiudad(idCarrera, ciudad));
+		}catch (Exception e){
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+		}
+	}
+	
 }

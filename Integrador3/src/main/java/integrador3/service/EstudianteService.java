@@ -18,6 +18,15 @@ public class EstudianteService {
 	private EstudianteRepository estudianteRepository;
 	
 	@Transactional
+    public Estudiante save(Estudiante estudiante) throws Exception {
+        try{
+            return estudianteRepository.save(estudiante);
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+	
+	@Transactional
     public List<EstudianteDTO> obtenerEstudiantesOrdenadosPorApellido() throws Exception { 
 		var result = estudianteRepository.obtenerEstudiantesOrdenadosPorApellido();
     	try{
@@ -30,13 +39,37 @@ public class EstudianteService {
     }
 	
 	@Transactional
-	public EstudianteDTO obtenerEstudiantePorLibUni(Long lu) throws Exception {
+	public EstudianteDTO obtenerEstudiantePorNroLibreta(Long lu) throws Exception {
 		try {
-			Estudiante e = estudianteRepository.obtenerEstudiantePorLibUni(lu);
+			Estudiante e = estudianteRepository.obtenerEstudiantePorNroLibreta(lu);
             return new EstudianteDTO(e.getDni(), e.getNombre(), e.getApellido(),e.getEdad(), e.getGenero(), e.getCiudadResidencia(), e.getNumLibretaUni());
 		}catch (Exception e){
             throw new Exception(e.getMessage());
         }
+	}
+	
+	@Transactional
+	public List<EstudianteDTO> obtenerEstudiantePorGenero(String genero) throws Exception { 
+		var result = estudianteRepository.obtenerEstudiantePorGenero(genero);
+		try{
+			return result.stream().map(p -> new EstudianteDTO(p.getDni(), p.getNombre(), 
+			p.getApellido(), p.getEdad(), p.getGenero(), p.getCiudadResidencia(), p.getNumLibretaUni()))
+			.collect(Collectors.toList());
+		}catch (Exception e){
+			throw new Exception(e.getMessage());
+		}
+	}
+		
+	@Transactional
+	public List<EstudianteDTO> obtenerEstudiantesDeCarreraPorCiudad(Long idCarrera, String ciudad) throws Exception {
+		var result = estudianteRepository.obtenerEstudiantesDeCarreraPorCiudad(idCarrera, ciudad);
+		try{
+			return result.stream().map(p -> new EstudianteDTO(p.getDni(), p.getNombre(), 
+			p.getApellido(), p.getEdad(), p.getGenero(), p.getCiudadResidencia(), p.getNumLibretaUni()))
+			.collect(Collectors.toList());
+		}catch (Exception e){
+			throw new Exception(e.getMessage());
+		}
 	}
 	
 }

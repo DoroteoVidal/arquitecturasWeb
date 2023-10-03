@@ -11,19 +11,19 @@ import integrador3.repository.EstudianteRepository;
 import integrador3.repository.InscripcionRepository;
 
 @Component
-public class DataUpload {
+public class CargaDatos {
 	private final EstudianteRepository estudianteRepository;
 	private final CarreraRepository carreraRepository;
 	private final InscripcionRepository inscripcionRepository;
 	
 	@Autowired
-	public DataUpload(EstudianteRepository estudianteRepository, CarreraRepository carreraRepository, InscripcionRepository inscripcionRepository) {
+	public CargaDatos(EstudianteRepository estudianteRepository, CarreraRepository carreraRepository, InscripcionRepository inscripcionRepository) {
 		this.estudianteRepository = estudianteRepository;
 		this.carreraRepository = carreraRepository;
 		this.inscripcionRepository = inscripcionRepository;
 	}
 	
-	public void upload() {
+	public void cargar() {
 		
 		Estudiante e1 = new Estudiante(41402756L, "Juan", "Perez", 24, "Male", "Pehuajo", 287913L);
 		Estudiante e2 = new Estudiante(40287619L, "Pedro", "Garcia", 25, "Male", "Tandil", 329171L);
