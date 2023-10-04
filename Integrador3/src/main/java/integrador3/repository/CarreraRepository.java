@@ -1,6 +1,7 @@
 package integrador3.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -24,5 +25,8 @@ public interface CarreraRepository extends JpaRepository<Carrera, Long> {
 			+ "HAVING fecha_graduacion != 0 "
 			+ "ORDER BY nombre, fecha_inscripcion ASC", nativeQuery = true)
 	public List<Object[]> obtenerReportes();
+	
+	@Query("SELECT c FROM Carrera c WHERE c.id = :id")
+	public Optional<Carrera> buscarPorId(Long id);
 	
 }

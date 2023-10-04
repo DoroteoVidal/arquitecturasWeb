@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import integrador3.model.Carrera;
-
 import integrador3.dto.CarreraDTO;
 import integrador3.dto.ReporteDTO;
 import integrador3.repository.CarreraRepository;

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import integrador3.model.Inscripcion;
+import integrador3.dto.InscripcionRequestDTO;
 import integrador3.service.InscripcionService;
 
 @RestController
@@ -19,9 +19,9 @@ public class InscripcionController {
     private InscripcionService inscripcionService;
 	
 	@PostMapping("")
-    public ResponseEntity<?> save(@RequestBody Inscripcion inscripcion){
+    public ResponseEntity<?> save(@RequestBody InscripcionRequestDTO dto) {	
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(inscripcionService.save(inscripcion));
+            return ResponseEntity.status(HttpStatus.OK).body(inscripcionService.save(dto));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. No se pudo ingresar, revise los campos e intente nuevamente.\"}");
         }
