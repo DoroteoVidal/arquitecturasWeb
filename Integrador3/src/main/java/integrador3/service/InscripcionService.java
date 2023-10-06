@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import integrador3.dto.InscripcionRequestDTO;
+import integrador3.dto.InscripcionDTO;
 import integrador3.model.Carrera;
 import integrador3.model.Estudiante;
 import integrador3.model.Inscripcion;
@@ -25,7 +25,7 @@ public class InscripcionService {
     private CarreraRepository carreraRepository;
 
     @Transactional
-    public InscripcionRequestDTO save(InscripcionRequestDTO dto) throws Exception {	
+    public InscripcionDTO save(InscripcionDTO dto) throws Exception {	
     	Estudiante estudiante = estudianteRepository.buscarPorDni(dto.getDniEstudiante()).get();
 		Carrera carrera = carreraRepository.buscarPorId(dto.getIdCarrera()).get();
     	Inscripcion inscripcion = new Inscripcion(estudiante, carrera, dto.getFechaInscripcion(), dto.getFechaGraduacion(), dto.getAntiguedad());
@@ -33,7 +33,7 @@ public class InscripcionService {
             if (inscripcionRepository.save(inscripcion) != null) {
             	return dto;
             }
-            return new InscripcionRequestDTO();
+            return null;
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }

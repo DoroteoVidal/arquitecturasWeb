@@ -1,15 +1,15 @@
 package integrador3.dto;
 
-public class InscripcionRequestDTO {
+public class InscripcionDTO {
 	private Long dniEstudiante;
 	private Long idCarrera;
 	private Long fechaInscripcion;
 	private Long fechaGraduacion;
 	private int antiguedad;
 	
-	public InscripcionRequestDTO() {}
+	public InscripcionDTO() {}
 	
-	public InscripcionRequestDTO(Long dniEstudiante, Long idCarrera, Long fechaInscripcion, Long fechaGraduacion,
+	public InscripcionDTO(Long dniEstudiante, Long idCarrera, Long fechaInscripcion, Long fechaGraduacion,
 			int antiguedad) {
 		super();
 		this.dniEstudiante = dniEstudiante;

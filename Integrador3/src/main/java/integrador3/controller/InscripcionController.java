@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import integrador3.dto.InscripcionRequestDTO;
+import integrador3.dto.InscripcionDTO;
 import integrador3.service.InscripcionService;
 
 @RestController
@@ -19,7 +19,7 @@ public class InscripcionController {
     private InscripcionService inscripcionService;
 	
 	@PostMapping("")
-    public ResponseEntity<?> save(@RequestBody InscripcionRequestDTO dto) {	
+    public ResponseEntity<?> save(@RequestBody InscripcionDTO dto) {	
         try{
             return ResponseEntity.status(HttpStatus.OK).body(inscripcionService.save(dto));
         }catch (Exception e){
