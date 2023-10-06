@@ -23,7 +23,7 @@ public class InscripcionController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(inscripcionService.save(dto));
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. No se pudo ingresar, revise los campos e intente nuevamente.\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. No se pudo guardar la inscripcion, verifique que los campos sean correctos e intente nuevamente.\"}");
         }
     }
 

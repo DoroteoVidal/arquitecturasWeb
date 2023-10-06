@@ -26,7 +26,7 @@ public class EstudianteController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(estudianteService.save(estudiante));
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. No se pudo ingresar, revise los campos e intente nuevamente.\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. No se pudo guardar el Estudiante, revise los campos e intente nuevamente.\"}");
         }
     }
 	
@@ -44,7 +44,7 @@ public class EstudianteController {
 		try{
             return ResponseEntity.status(HttpStatus.OK).body(estudianteService.obtenerEstudiantePorNroLibreta(libreta));
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. No existe Estudiante con el numero de libreta ingresado, revise el campo e intente nuevamente.\"}");
         }
 	}
 	
@@ -53,7 +53,7 @@ public class EstudianteController {
 		try{
 			return ResponseEntity.status(HttpStatus.OK).body(estudianteService.obtenerEstudiantePorGenero(genero));
 		}catch (Exception e){
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. No hay Estudiantes con el tipo de genero ingresado, revise el campo e intente nuevamente.\"}");
 		}
 	}
 
@@ -62,7 +62,7 @@ public class EstudianteController {
 		try{
 			return ResponseEntity.status(HttpStatus.OK).body(estudianteService.obtenerEstudiantesDeCarreraPorCiudad(idCarrera, ciudad));
 		}catch (Exception e){
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. No hay Estudiantes que cumplan con la solicitud, revise los campos e intente nuevamente.\"}");
 		}
 	}
 	

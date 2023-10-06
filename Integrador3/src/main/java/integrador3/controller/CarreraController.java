@@ -25,7 +25,7 @@ public class CarreraController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(carreraService.save(carrera));
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. No se pudo ingresar, revise los campos e intente nuevamente.\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. No se pudo ingresar la Carrera, revise los campos e intente nuevamente.\"}");
         }
     }
 	
@@ -34,7 +34,7 @@ public class CarreraController {
 		try{
 			return ResponseEntity.status(HttpStatus.OK).body(carreraService.obtenerCarrerasConEstudiantesInscriptos());
 		}catch (Exception e){
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. No hay Carreras con Estudiantes inscriptos, por favor intente más tarde.\"}");
 		}
 	}
 	
