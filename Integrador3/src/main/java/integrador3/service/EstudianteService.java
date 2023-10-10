@@ -41,7 +41,7 @@ public class EstudianteService {
 	@Transactional
 	public EstudianteDTO obtenerEstudiantePorNroLibreta(Long lu) throws Exception {
 		try {
-			Estudiante e = estudianteRepository.obtenerEstudiantePorNroLibreta(lu);
+			Estudiante e = estudianteRepository.obtenerEstudiantePorNroLibreta(lu).get();
             return new EstudianteDTO(e.getDni(), e.getNombre(), e.getApellido(),e.getEdad(), e.getGenero(), e.getCiudadResidencia(), e.getNumLibretaUni());
 		}catch (Exception e){
             throw new Exception(e.getMessage());
@@ -53,8 +53,7 @@ public class EstudianteService {
 		var result = estudianteRepository.obtenerEstudiantePorGenero(genero);
 		try{
 			return result.stream().map(p -> new EstudianteDTO(p.getDni(), p.getNombre(), 
-			p.getApellido(), p.getEdad(), p.getGenero(), p.getCiudadResidencia(), p.getNumLibretaUni()))
-			.collect(Collectors.toList());
+			p.getApellido(), p.getEdad(), p.getGenero(), p.getCiudadResidencia(), p.getNumLibretaUni())).collect(Collectors.toList());
 		}catch (Exception e){
 			throw new Exception(e.getMessage());
 		}
