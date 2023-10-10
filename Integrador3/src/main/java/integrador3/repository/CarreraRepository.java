@@ -12,7 +12,7 @@ public interface CarreraRepository extends JpaRepository<Carrera, Long> {
 	
 	@Query("SELECT c.nombre, COUNT(ec.estudiante) "
 			+ "FROM Carrera c JOIN c.estudiantes ec ON (c.id = ec.carrera.id) "
-			+ "GROUP BY c.nombre ORDER BY COUNT(ec.estudiante) ASC")
+			+ "GROUP BY c.nombre ORDER BY COUNT(ec.estudiante) DESC")
 	public List<Object[]> obtenerCarrerasConEstudiantesInscriptos();
 	
 	@Query(value = "SELECT nombre, fecha_inscripcion, COUNT(fecha_inscripcion) as inscriptos, 0 as graduados "

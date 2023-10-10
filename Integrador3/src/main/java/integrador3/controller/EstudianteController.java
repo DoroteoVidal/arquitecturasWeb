@@ -39,7 +39,7 @@ public class EstudianteController {
         }
 	}
 	
-	@GetMapping("/porLibretaUni/{libreta}")
+	@GetMapping("/porNroLibreta/{libreta}")
 	public ResponseEntity<?> obtenerEstudiantePorNroLibreta(@PathVariable Long libreta) {
 		try{
             return ResponseEntity.status(HttpStatus.OK).body(estudianteService.obtenerEstudiantePorNroLibreta(libreta));
@@ -57,7 +57,7 @@ public class EstudianteController {
 		}
 	}
 
-	@GetMapping("/porCarreraYCiudad/{idCarrera}/{ciudad}")
+	@GetMapping("/deCarreraPorCiudad/{idCarrera}/{ciudad}")
 	public ResponseEntity<?> obtenerEstudiantesDeCarreraPorCiudad(@PathVariable Long idCarrera, @PathVariable String ciudad) {
 		try{
 			return ResponseEntity.status(HttpStatus.OK).body(estudianteService.obtenerEstudiantesDeCarreraPorCiudad(idCarrera, ciudad));
